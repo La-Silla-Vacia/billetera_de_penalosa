@@ -14,14 +14,38 @@ export default class Base extends Component {
 
     this.state = {
       data: [],
+      sources: [],
       loading: true
     };
 
     this.setData = this.setData.bind(this);
   }
 
-  setData(data) {
-    this.setState({ data: data, loading: false });
+  setData(newData) {
+    const data = this.formatData(newData.Data);
+    const sources = this.formatSources(newData.Sources);
+    this.setState({ data, sources, loading: false });
+  }
+
+  formatData(data) {
+    return data.map((item, key) => {
+      return {
+        id: key + 1,
+        name: item.obra,
+        amount: Number(item.cuantoCuesta)
+      }
+    });
+  }
+
+  formatSources(data) {
+    return data.map((item, key) => {
+      return {
+        id: key + 1,
+        name: item.name,
+        show: item.default,
+        amount: item.amount
+      }
+    })
   }
 
   componentWillMount() {
@@ -29,17 +53,17 @@ export default class Base extends Component {
   }
 
   render(props, state) {
-    const { loading, data } = state;
+    const { loading, data, sources } = state;
 
     let content = (loading) ? (<LoadScreen />) : (
       <div className={s.inner}>
         <h2 className={s.title}>Hello billetera_de_penalosa!</h2>
-        <Graphic data={data} />
+        <Graphic data={data} sources={sources} />
       </div>
     );
 
-    return(
-      <div className={cn(s.container, {[s.loading]: loading})}>
+    return (
+      <div className={cn(s.container, { [s.loading]: loading })}>
         { content }
       </div>
     )

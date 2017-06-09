@@ -1,0 +1,13 @@
+.container {
+  background-color: #fff;
+}
+
+.table {
+  display: flex;
+  flex-wrap: wrap;
+  font-style: italic;
+
+  & > div {
+    width: 50%;
+  }
+}
