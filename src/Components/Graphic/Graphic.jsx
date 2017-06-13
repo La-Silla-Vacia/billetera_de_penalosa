@@ -30,11 +30,10 @@ export default class Graphic extends Component {
     props.data.map((item) => {
       budget += item.amount;
     });
-    console.log(budget);
     this.setState({ budget });
   }
 
-  getCircles() {
+  getOptions() {
     const { data } = this.props;
     return data.map((item) => {
         return (
@@ -76,7 +75,7 @@ export default class Graphic extends Component {
   render(props, state) {
     const { percentage } = state;
     const { sources } = props;
-    const circles = this.getCircles();
+    const options = this.getOptions();
     const style = {
       height: `${percentage}%`
     };
@@ -84,7 +83,7 @@ export default class Graphic extends Component {
     return (
       <div className={s.container}>
         <ul className={s.options}>
-          {circles}
+          {options}
         </ul>
         <Sources items={sources} />
         <div className={s.glass}>

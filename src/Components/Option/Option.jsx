@@ -1,4 +1,5 @@
 import { h, render, Component } from 'preact';
+import cn from 'classnames';
 import s from './Option.css';
 
 export default class Item extends Component {
@@ -21,10 +22,10 @@ export default class Item extends Component {
 
   render(props, state) {
     const { value } = state;
-    const { name, id } = props;
+    const { name, id, simple } = props;
 
     return (
-      <li className={s.container}>
+      <li className={cn(s.container, {[s.simple]: simple})}>
         <input className={s.input}
                onChange={this.handleChange}
                value={value}

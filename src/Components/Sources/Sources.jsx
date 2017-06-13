@@ -1,13 +1,16 @@
 import { h, render, Component } from 'preact';
+import Option from "../Option";
+
 import s from './Sources.css';
 
 export default class Possessions extends Component {
   getItems() {
     const { items } = this.props;
     return items.map((item) => {
-      const { id, name } = item;
+      const { id, show } = item;
+      if (show) return;
       return (
-        <div key={id}>{name}</div>
+        <Option {...item} simple key={id} />
       )
     });
   }
@@ -16,10 +19,10 @@ export default class Possessions extends Component {
     const items = this.getItems();
     return (
       <div className={s.container}>
-        <h2>Sources</h2>
-        <div className={s.table}>
+        <h2 className={s.title}>Sources</h2>
+        <ul className={s.list}>
           {items}
-        </div>
+        </ul>
       </div>
     )
   }

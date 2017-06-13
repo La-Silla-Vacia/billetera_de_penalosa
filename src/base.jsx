@@ -30,7 +30,7 @@ export default class Base extends Component {
   formatData(data) {
     return data.map((item, key) => {
       return {
-        id: key + 1,
+        id: `obra-${key + 1}`,
         name: item.obra,
         amount: Number(item.cuantoCuesta)
       }
@@ -40,7 +40,7 @@ export default class Base extends Component {
   formatSources(data) {
     return data.map((item, key) => {
       return {
-        id: key + 1,
+        id: `source-${key + 1}`,
         name: item.name,
         show: item.default,
         amount: item.amount
